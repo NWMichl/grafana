@@ -144,7 +144,7 @@
         },
         {
           "$$hashKey": "object:1018",
-          "alias": "Emergancy",
+          "alias": "Emergency",
           "color": "#8F3BB8",
           "stack": "A"
         }
@@ -520,7 +520,7 @@
           ]
         },
         {
-          "alias": "Emergancy",
+          "alias": "Emergency",
           "groupBy": [
             {
               "params": [
