@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.2.0"
+      "version": "7.4.0"
     },
     {
       "type": "panel",
@@ -53,7 +53,7 @@
   "gnetId": 12433,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1601467880926,
+  "iteration": 1615126100874,
   "links": [],
   "panels": [
     {
@@ -101,49 +101,42 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.0",
+      "pluginVersion": "7.4.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "$$hashKey": "object:1012",
           "alias": "Info",
           "color": "rgb(80, 80, 80)",
           "stack": "A"
         },
         {
-          "$$hashKey": "object:1013",
           "alias": "Notice",
           "color": "rgb(182, 182, 182)",
           "stack": "A"
         },
         {
-          "$$hashKey": "object:1014",
           "alias": "Warning",
           "color": "#E0B400",
           "stack": "A"
         },
         {
-          "$$hashKey": "object:1015",
           "alias": "Error",
           "color": "#FF780A",
           "stack": "A"
         },
         {
-          "$$hashKey": "object:1016",
           "alias": "Critical",
           "color": "#E02F44",
           "stack": "A"
         },
         {
-          "$$hashKey": "object:1017",
           "alias": "Alert",
           "color": "#8F3BB8",
           "stack": "A"
         },
         {
-          "$$hashKey": "object:1018",
           "alias": "Emergency",
           "color": "#8F3BB8",
           "stack": "A"
@@ -211,6 +204,12 @@
               "key": "appname",
               "operator": "=~",
               "value": "/^$appname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "message",
+              "operator": "=~",
+              "value": "/$Query/"
             }
           ]
         },
@@ -272,6 +271,12 @@
               "key": "appname",
               "operator": "=~",
               "value": "/^$appname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "message",
+              "operator": "=~",
+              "value": "/$Query/"
             }
           ]
         },
@@ -333,6 +338,12 @@
               "key": "appname",
               "operator": "=~",
               "value": "/^$appname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "message",
+              "operator": "=~",
+              "value": "/$Query/"
             }
           ]
         },
@@ -394,6 +405,12 @@
               "key": "appname",
               "operator": "=~",
               "value": "/^$appname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "message",
+              "operator": "=~",
+              "value": "/$Query/"
             }
           ]
         },
@@ -455,6 +472,12 @@
               "key": "appname",
               "operator": "=~",
               "value": "/^$appname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "message",
+              "operator": "=~",
+              "value": "/$Query/"
             }
           ]
         },
@@ -516,6 +539,12 @@
               "key": "appname",
               "operator": "=~",
               "value": "/^$appname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "message",
+              "operator": "=~",
+              "value": "/$Query/"
             }
           ]
         },
@@ -577,6 +606,12 @@
               "key": "appname",
               "operator": "=~",
               "value": "/^$appname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "message",
+              "operator": "=~",
+              "value": "/$Query/"
             }
           ]
         }
@@ -627,6 +662,9 @@
       "datasource": "${DS_INFLUXDB}",
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
           "custom": {
             "align": "left",
             "displayMode": "auto",
@@ -807,7 +845,7 @@
           }
         ]
       },
-      "pluginVersion": "7.2.0",
+      "pluginVersion": "7.4.0",
       "targets": [
         {
           "groupBy": [
@@ -864,6 +902,12 @@
               "key": "severity",
               "operator": "=~",
               "value": "/^$severity$/"
+            },
+            {
+              "condition": "AND",
+              "key": "message",
+              "operator": "=~",
+              "value": "/$Query/"
             }
           ]
         }
@@ -875,7 +919,7 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 26,
+  "schemaVersion": 27,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -885,6 +929,8 @@
         "current": {},
         "datasource": "${DS_INFLUXDB}",
         "definition": "SHOW TAG VALUES FROM syslog WITH KEY=appname",
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "Appname",
@@ -907,6 +953,8 @@
         "current": {},
         "datasource": "${DS_INFLUXDB}",
         "definition": "SHOW TAG VALUES FROM syslog WITH KEY=hostname",
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "Hostname",
@@ -929,6 +977,8 @@
         "current": {},
         "datasource": "${DS_INFLUXDB}",
         "definition": "SHOW TAG VALUES FROM syslog WITH KEY=severity",
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "Severity",
@@ -947,19 +997,26 @@
         "useTags": false
       },
       {
-        "datasource": "InfluxDB",
-        "filters": [
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
+        },
+        "description": "Querystring",
+        "error": null,
+        "hide": 0,
+        "label": "MessageQuery",
+        "name": "Query",
+        "options": [
           {
-            "key": "message",
-            "operator": "=~",
-            "value": "//"
+            "selected": true,
+            "text": "",
+            "value": ""
           }
         ],
-        "hide": 0,
-        "label": "Query",
-        "name": "Query",
+        "query": "",
         "skipUrlSync": false,
-        "type": "adhoc"
+        "type": "textbox"
       }
     ]
   },
@@ -988,7 +1045,7 @@
     ]
   },
   "timezone": "",
-  "title": "Syslog Dashboard",
-  "uid": "TIYeHqRgz",
+  "title": "Syslog",
+  "uid": "TIYeHqRgZ",
   "version": 6
 }
