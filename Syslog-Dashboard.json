@@ -53,7 +53,7 @@
   "gnetId": 12433,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1615126100874,
+  "iteration": 1616092347593,
   "links": [],
   "panels": [
     {
@@ -660,6 +660,7 @@
     },
     {
       "datasource": "${DS_INFLUXDB}",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -887,7 +888,7 @@
           ],
           "tags": [
             {
-              "key": "host",
+              "key": "hostname",
               "operator": "=~",
               "value": "/^$hostname$/"
             },
@@ -914,7 +915,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Panel Title",
+      "title": "Syslog Messages",
       "type": "table"
     }
   ],
@@ -1047,5 +1048,5 @@
   "timezone": "",
   "title": "Syslog",
   "uid": "TIYeHqRgZ",
-  "version": 6
+  "version": 7
 }
