@@ -1,45 +1,12 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_INFLUXDB",
-      "label": "InfluxDB",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "influxdb",
-      "pluginName": "InfluxDB"
-    }
-  ],
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "7.4.0"
-    },
-    {
-      "type": "panel",
-      "id": "graph",
-      "name": "Graph",
-      "version": ""
-    },
-    {
-      "type": "datasource",
-      "id": "influxdb",
-      "name": "InfluxDB",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "table",
-      "name": "Table",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -50,104 +17,281 @@
   },
   "description": "Telegraf / InfluxDB / Grafana as syslog receiver",
   "editable": true,
+  "fiscalYearStartMonth": 0,
   "gnetId": 12433,
   "graphTooltip": 0,
-  "id": null,
-  "iteration": 1616092347593,
+  "id": 5,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
-      "aliasColors": {},
-      "bars": true,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_INFLUXDB}",
-      "decimals": 0,
+      "datasource": {
+        "type": "influxdb",
+        "uid": "cbd610b1-a337-49cb-b265-6ddf37d4d858"
+      },
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Messages / min",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "info"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#505050",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "notice"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#808080",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "warning"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#e0b400",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "err"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#ff780a",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "crit"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#808080",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "alert"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#8f3bb8",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "emerg"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#8f3bb8",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "debug"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "palette-classic"
+                }
+              },
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "normal"
+                }
+              }
+            ]
+          }
+        ]
       },
-      "fill": 1,
-      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 24,
         "x": 0,
         "y": 0
       },
-      "hiddenSeries": false,
       "id": 10,
       "interval": "",
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "sort": null,
-        "sortDesc": null,
-        "total": true,
-        "values": true
-      },
-      "lines": false,
-      "linewidth": 1,
       "links": [],
-      "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.4.0",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "Info",
-          "color": "rgb(80, 80, 80)",
-          "stack": "A"
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": false
         },
-        {
-          "alias": "Notice",
-          "color": "rgb(182, 182, 182)",
-          "stack": "A"
-        },
-        {
-          "alias": "Warning",
-          "color": "#E0B400",
-          "stack": "A"
-        },
-        {
-          "alias": "Error",
-          "color": "#FF780A",
-          "stack": "A"
-        },
-        {
-          "alias": "Critical",
-          "color": "#E02F44",
-          "stack": "A"
-        },
-        {
-          "alias": "Alert",
-          "color": "#8F3BB8",
-          "stack": "A"
-        },
-        {
-          "alias": "Emergency",
-          "color": "#8F3BB8",
-          "stack": "A"
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
         }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      },
+      "pluginVersion": "10.0.3",
       "targets": [
         {
           "alias": "Info",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cbd610b1-a337-49cb-b265-6ddf37d4d858"
+          },
           "groupBy": [
             {
               "params": [
@@ -165,7 +309,8 @@
           "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "A",
+          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/ and \r\n    r[\"severity\"] == \"debug\"\r\n  )\r\n  |> aggregateWindow(every: 1m, fn: count)",
+          "refId": "debug",
           "resultFormat": "time_series",
           "select": [
             [
@@ -215,6 +360,10 @@
         },
         {
           "alias": "Notice",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cbd610b1-a337-49cb-b265-6ddf37d4d858"
+          },
           "groupBy": [
             {
               "params": [
@@ -232,7 +381,8 @@
           "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "B",
+          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/ and \r\n    r[\"severity\"] == \"info\"\r\n  )\r\n  |> aggregateWindow(every: 1m, fn: count)",
+          "refId": "info",
           "resultFormat": "time_series",
           "select": [
             [
@@ -282,6 +432,10 @@
         },
         {
           "alias": "Warning",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cbd610b1-a337-49cb-b265-6ddf37d4d858"
+          },
           "groupBy": [
             {
               "params": [
@@ -299,7 +453,8 @@
           "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "D",
+          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/ and \r\n    r[\"severity\"] == \"notice\"\r\n  )\r\n  |> aggregateWindow(every: 1m, fn: count)",
+          "refId": "notice",
           "resultFormat": "time_series",
           "select": [
             [
@@ -349,6 +504,10 @@
         },
         {
           "alias": "Error",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cbd610b1-a337-49cb-b265-6ddf37d4d858"
+          },
           "groupBy": [
             {
               "params": [
@@ -366,7 +525,8 @@
           "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "C",
+          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/ and \r\n    r[\"severity\"] == \"warning\"\r\n  )\r\n  |> aggregateWindow(every: 1m, fn: count)",
+          "refId": "warning",
           "resultFormat": "time_series",
           "select": [
             [
@@ -416,6 +576,10 @@
         },
         {
           "alias": "Critical",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cbd610b1-a337-49cb-b265-6ddf37d4d858"
+          },
           "groupBy": [
             {
               "params": [
@@ -433,7 +597,8 @@
           "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "E",
+          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/ and \r\n    r[\"severity\"] == \"err\"\r\n  )\r\n  |> aggregateWindow(every: 1m, fn: count)",
+          "refId": "err",
           "resultFormat": "time_series",
           "select": [
             [
@@ -483,6 +648,10 @@
         },
         {
           "alias": "Alert",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cbd610b1-a337-49cb-b265-6ddf37d4d858"
+          },
           "groupBy": [
             {
               "params": [
@@ -500,7 +669,8 @@
           "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "F",
+          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/ and \r\n    r[\"severity\"] == \"crit\"\r\n  )\r\n  |> aggregateWindow(every: 1m, fn: count)",
+          "refId": "crit",
           "resultFormat": "time_series",
           "select": [
             [
@@ -550,6 +720,10 @@
         },
         {
           "alias": "Emergency",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cbd610b1-a337-49cb-b265-6ddf37d4d858"
+          },
           "groupBy": [
             {
               "params": [
@@ -567,7 +741,8 @@
           "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "G",
+          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/ and \r\n    r[\"severity\"] == \"alert\"\r\n  )\r\n  |> aggregateWindow(every: 1m, fn: count)",
+          "refId": "alert",
           "resultFormat": "time_series",
           "select": [
             [
@@ -614,52 +789,25 @@
               "value": "/$Query/"
             }
           ]
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "syslog count",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 0,
-          "format": "none",
-          "label": "Messages / min",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
         },
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cbd610b1-a337-49cb-b265-6ddf37d4d858"
+          },
+          "hide": false,
+          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/ and \r\n    r[\"severity\"] == \"emerg\"\r\n  )\r\n  |> aggregateWindow(every: 1m, fn: count)",
+          "refId": "emerg"
         }
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "title": "syslog count",
+      "type": "timeseries"
     },
     {
-      "datasource": "${DS_INFLUXDB}",
+      "datasource": {
+        "type": "influxdb",
+        "uid": "cbd610b1-a337-49cb-b265-6ddf37d4d858"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -668,8 +816,11 @@
           },
           "custom": {
             "align": "left",
-            "displayMode": "auto",
-            "filterable": false
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
           },
           "mappings": [],
           "thresholds": {
@@ -717,74 +868,42 @@
                 "id": "mappings",
                 "value": [
                   {
-                    "from": "",
-                    "id": 0,
-                    "text": "Debug",
-                    "to": "",
-                    "type": 1,
-                    "value": "7"
-                  },
-                  {
-                    "from": "",
-                    "id": 1,
-                    "text": "Info",
-                    "to": "",
-                    "type": 1,
-                    "value": "6"
-                  },
-                  {
-                    "from": "",
-                    "id": 2,
-                    "text": "Notice",
-                    "to": "",
-                    "type": 1,
-                    "value": "5"
-                  },
-                  {
-                    "from": "",
-                    "id": 3,
-                    "text": "Warning",
-                    "to": "",
-                    "type": 1,
-                    "value": "4"
-                  },
-                  {
-                    "from": "",
-                    "id": 4,
-                    "text": "Error",
-                    "to": "",
-                    "type": 1,
-                    "value": "3"
-                  },
-                  {
-                    "from": "",
-                    "id": 5,
-                    "text": "Critical",
-                    "to": "",
-                    "type": 1,
-                    "value": "2"
-                  },
-                  {
-                    "from": "",
-                    "id": 6,
-                    "text": "Alert",
-                    "to": "",
-                    "type": 1,
-                    "value": "1"
-                  },
-                  {
-                    "from": "",
-                    "id": 7,
-                    "text": "Emergency",
-                    "to": "",
-                    "type": 1,
-                    "value": "0"
+                    "options": {
+                      "0": {
+                        "text": "Emergency"
+                      },
+                      "1": {
+                        "text": "Alert"
+                      },
+                      "2": {
+                        "text": "Critical"
+                      },
+                      "3": {
+                        "text": "Error"
+                      },
+                      "4": {
+                        "text": "Warning"
+                      },
+                      "5": {
+                        "text": "Notice"
+                      },
+                      "6": {
+                        "text": "Info"
+                      },
+                      "7": {
+                        "text": "Debug"
+                      }
+                    },
+                    "type": "value"
                   }
                 ]
               },
               {
-                "id": "custom.displayMode",
-                "value": "color-background"
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                }
               },
               {
                 "id": "custom.width",
@@ -838,17 +957,25 @@
       },
       "id": 12,
       "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
         "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "Time"
-          }
-        ]
+        "sortBy": []
       },
-      "pluginVersion": "7.4.0",
+      "pluginVersion": "10.0.3",
       "targets": [
         {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cbd610b1-a337-49cb-b265-6ddf37d4d858"
+          },
           "groupBy": [
             {
               "params": [
@@ -866,6 +993,7 @@
           "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"syslog\" and\r\n    r._field == \"message\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/\r\n  )",
           "refId": "A",
           "resultFormat": "table",
           "select": [
@@ -913,86 +1041,96 @@
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Syslog Messages",
       "type": "table"
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 27,
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": "",
-        "current": {},
-        "datasource": "${DS_INFLUXDB}",
-        "definition": "SHOW TAG VALUES FROM syslog WITH KEY=appname",
-        "description": null,
-        "error": null,
+        "allValue": ".*",
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "cbd610b1-a337-49cb-b265-6ddf37d4d858"
+        },
+        "definition": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"syslog\")\r\n  |> keyValues(keyColumns: [\"appname\"])\r\n  |> group()\r\n  |> keep(columns: [\"appname\"])\r\n  |> distinct(column: \"appname\")",
         "hide": 0,
         "includeAll": true,
         "label": "Appname",
-        "multi": true,
+        "multi": false,
         "name": "appname",
         "options": [],
-        "query": "SHOW TAG VALUES FROM syslog WITH KEY=appname",
+        "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"syslog\")\r\n  |> keyValues(keyColumns: [\"appname\"])\r\n  |> group()\r\n  |> keep(columns: [\"appname\"])\r\n  |> distinct(column: \"appname\")",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
       },
       {
-        "allValue": "",
-        "current": {},
-        "datasource": "${DS_INFLUXDB}",
-        "definition": "SHOW TAG VALUES FROM syslog WITH KEY=hostname",
-        "description": null,
-        "error": null,
+        "allValue": ".*",
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "cbd610b1-a337-49cb-b265-6ddf37d4d858"
+        },
+        "definition": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"syslog\")\r\n  |> keyValues(keyColumns: [\"hostname\"])\r\n  |> group()\r\n  |> keep(columns: [\"hostname\"])\r\n  |> distinct(column: \"hostname\")",
         "hide": 0,
         "includeAll": true,
         "label": "Hostname",
-        "multi": true,
+        "multi": false,
         "name": "hostname",
         "options": [],
-        "query": "SHOW TAG VALUES FROM syslog WITH KEY=hostname",
+        "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"syslog\")\r\n  |> keyValues(keyColumns: [\"hostname\"])\r\n  |> group()\r\n  |> keep(columns: [\"hostname\"])\r\n  |> distinct(column: \"hostname\")",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
       },
       {
-        "allValue": "",
-        "current": {},
-        "datasource": "${DS_INFLUXDB}",
-        "definition": "SHOW TAG VALUES FROM syslog WITH KEY=severity",
-        "description": null,
-        "error": null,
+        "allValue": ".*",
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "cbd610b1-a337-49cb-b265-6ddf37d4d858"
+        },
+        "definition": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"syslog\")\r\n  |> keyValues(keyColumns: [\"severity\"])\r\n  |> group()\r\n  |> keep(columns: [\"severity\"])\r\n  |> distinct(column: \"severity\")",
         "hide": 0,
         "includeAll": true,
         "label": "Severity",
-        "multi": true,
+        "multi": false,
         "name": "severity",
         "options": [],
-        "query": "SHOW TAG VALUES FROM syslog WITH KEY=severity",
+        "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"syslog\")\r\n  |> keyValues(keyColumns: [\"severity\"])\r\n  |> group()\r\n  |> keep(columns: [\"severity\"])\r\n  |> distinct(column: \"severity\")",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -1000,22 +1138,21 @@
       {
         "current": {
           "selected": false,
-          "text": "",
-          "value": ""
+          "text": ".*",
+          "value": ".*"
         },
         "description": "Querystring",
-        "error": null,
         "hide": 0,
-        "label": "MessageQuery",
-        "name": "Query",
+        "label": "Message",
+        "name": "messagequery",
         "options": [
           {
             "selected": true,
-            "text": "",
-            "value": ""
+            "text": ".*",
+            "value": ".*"
           }
         ],
-        "query": "",
+        "query": ".*",
         "skipUrlSync": false,
         "type": "textbox"
       }
@@ -1046,7 +1183,8 @@
     ]
   },
   "timezone": "",
-  "title": "Syslog",
-  "uid": "TIYeHqRgZ",
-  "version": 7
+  "title": "Syslog-v2.0",
+  "uid": "TIYeHqRgZ2",
+  "version": 20,
+  "weekStart": ""
 }
