@@ -85,13 +85,13 @@
           {
             "matcher": {
               "id": "byFrameRefID",
-              "options": "info"
+              "options": "debug"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#505050",
+                  "fixedColor": "#050505",
                   "mode": "fixed"
                 }
               },
@@ -101,6 +101,36 @@
                   "group": "A",
                   "mode": "normal"
                 }
+              },
+              {
+                "id": "displayName",
+                "value": "Debug"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "info"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#333333",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "normal"
+                }
+              },
+              {
+                "id": "displayName",
+                "value": "Info"
               }
             ]
           },
@@ -113,7 +143,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#808080",
+                  "fixedColor": "#969696",
                   "mode": "fixed"
                 }
               },
@@ -123,6 +153,10 @@
                   "group": "A",
                   "mode": "normal"
                 }
+              },
+              {
+                "id": "displayName",
+                "value": "Notice"
               }
             ]
           },
@@ -145,6 +179,10 @@
                   "group": "A",
                   "mode": "normal"
                 }
+              },
+              {
+                "id": "displayName",
+                "value": "Warning"
               }
             ]
           },
@@ -157,7 +195,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#ff780a",
+                  "fixedColor": "#fa6400",
                   "mode": "fixed"
                 }
               },
@@ -167,6 +205,10 @@
                   "group": "A",
                   "mode": "normal"
                 }
+              },
+              {
+                "id": "displayName",
+                "value": "Error"
               }
             ]
           },
@@ -179,7 +221,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#808080",
+                  "fixedColor": "#c4162a",
                   "mode": "fixed"
                 }
               },
@@ -189,6 +231,10 @@
                   "group": "A",
                   "mode": "normal"
                 }
+              },
+              {
+                "id": "displayName",
+                "value": "Critical"
               }
             ]
           },
@@ -211,6 +257,10 @@
                   "group": "A",
                   "mode": "normal"
                 }
+              },
+              {
+                "id": "displayName",
+                "value": "Alert"
               }
             ]
           },
@@ -233,27 +283,10 @@
                   "group": "A",
                   "mode": "normal"
                 }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byFrameRefID",
-              "options": "debug"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "mode": "palette-classic"
-                }
               },
               {
-                "id": "custom.stacking",
-                "value": {
-                  "group": "A",
-                  "mode": "normal"
-                }
+                "id": "displayName",
+                "value": "Emergency"
               }
             ]
           }
@@ -277,7 +310,7 @@
           ],
           "displayMode": "table",
           "placement": "right",
-          "showLegend": false
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -309,7 +342,7 @@
           "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/ and \r\n    r[\"severity\"] == \"debug\"\r\n  )\r\n  |> aggregateWindow(every: 1m, fn: count)",
+          "query": "from(bucket: v.defaultBucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /^${appname:regex}$/ and\r\n    r[\"hostname\"] =~ /^${hostname:regex}$/ and\r\n    r[\"severity\"] =~ /^${severity:regex}$/ and \r\n    r[\"severity\"] == \"debug\"\r\n  )\r\n  |> group()\r\n  |> aggregateWindow(every: 1m, fn: count)",
           "refId": "debug",
           "resultFormat": "time_series",
           "select": [
@@ -381,7 +414,7 @@
           "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/ and \r\n    r[\"severity\"] == \"info\"\r\n  )\r\n  |> aggregateWindow(every: 1m, fn: count)",
+          "query": "from(bucket: v.defaultBucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /^${appname:regex}$/ and\r\n    r[\"hostname\"] =~ /^${hostname:regex}$/ and\r\n    r[\"severity\"] =~ /^${severity:regex}$/ and \r\n    r[\"severity\"] == \"info\"\r\n  )\r\n  |> group()\r\n  |> aggregateWindow(every: 1m, fn: count)",
           "refId": "info",
           "resultFormat": "time_series",
           "select": [
@@ -453,7 +486,7 @@
           "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/ and \r\n    r[\"severity\"] == \"notice\"\r\n  )\r\n  |> aggregateWindow(every: 1m, fn: count)",
+          "query": "from(bucket: v.defaultBucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /^${appname:regex}$/ and\r\n    r[\"hostname\"] =~ /^${hostname:regex}$/ and\r\n    r[\"severity\"] =~ /^${severity:regex}$/ and \r\n    r[\"severity\"] == \"notice\"\r\n  )\r\n  |> group()\r\n  |> aggregateWindow(every: 1m, fn: count)",
           "refId": "notice",
           "resultFormat": "time_series",
           "select": [
@@ -525,7 +558,7 @@
           "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/ and \r\n    r[\"severity\"] == \"warning\"\r\n  )\r\n  |> aggregateWindow(every: 1m, fn: count)",
+          "query": "from(bucket: v.defaultBucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /^${appname:regex}$/ and\r\n    r[\"hostname\"] =~ /^${hostname:regex}$/ and\r\n    r[\"severity\"] =~ /^${severity:regex}$/ and \r\n    r[\"severity\"] == \"warning\"\r\n  )\r\n  |> group()\r\n  |> aggregateWindow(every: 1m, fn: count)",
           "refId": "warning",
           "resultFormat": "time_series",
           "select": [
@@ -597,7 +630,7 @@
           "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/ and \r\n    r[\"severity\"] == \"err\"\r\n  )\r\n  |> aggregateWindow(every: 1m, fn: count)",
+          "query": "from(bucket: v.defaultBucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /^${appname:regex}$/ and\r\n    r[\"hostname\"] =~ /^${hostname:regex}$/ and\r\n    r[\"severity\"] =~ /^${severity:regex}$/ and \r\n    r[\"severity\"] == \"err\"\r\n  )\r\n  |> group()\r\n  |> aggregateWindow(every: 1m, fn: count)",
           "refId": "err",
           "resultFormat": "time_series",
           "select": [
@@ -669,7 +702,7 @@
           "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/ and \r\n    r[\"severity\"] == \"crit\"\r\n  )\r\n  |> aggregateWindow(every: 1m, fn: count)",
+          "query": "from(bucket: v.defaultBucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /^${appname:regex}$/ and\r\n    r[\"hostname\"] =~ /^${hostname:regex}$/ and\r\n    r[\"severity\"] =~ /^${severity:regex}$/ and \r\n    r[\"severity\"] == \"crit\"\r\n  )\r\n  |> group()\r\n  |> aggregateWindow(every: 1m, fn: count)",
           "refId": "crit",
           "resultFormat": "time_series",
           "select": [
@@ -741,7 +774,7 @@
           "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/ and \r\n    r[\"severity\"] == \"alert\"\r\n  )\r\n  |> aggregateWindow(every: 1m, fn: count)",
+          "query": "from(bucket: v.defaultBucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /^${appname:regex}$/ and\r\n    r[\"hostname\"] =~ /^${hostname:regex}$/ and\r\n    r[\"severity\"] =~ /^${severity:regex}$/ and \r\n    r[\"severity\"] == \"alert\"\r\n  )\r\n  |> group()\r\n  |> aggregateWindow(every: 1m, fn: count)",
           "refId": "alert",
           "resultFormat": "time_series",
           "select": [
@@ -796,11 +829,11 @@
             "uid": "cbd610b1-a337-49cb-b265-6ddf37d4d858"
           },
           "hide": false,
-          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/ and \r\n    r[\"severity\"] == \"emerg\"\r\n  )\r\n  |> aggregateWindow(every: 1m, fn: count)",
+          "query": "from(bucket: v.defaultBucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => \r\n    r[\"_measurement\"] == \"syslog\" and\r\n    r[\"_field\"] == \"severity_code\" and\r\n    r[\"appname\"] =~ /^${appname:regex}$/ and\r\n    r[\"hostname\"] =~ /^${hostname:regex}$/ and\r\n    r[\"severity\"] =~ /^${severity:regex}$/ and \r\n    r[\"severity\"] == \"emerg\"\r\n  )\r\n  |> group()\r\n  |> aggregateWindow(every: 1m, fn: count)",
           "refId": "emerg"
         }
       ],
-      "title": "syslog count",
+      "title": "Syslog Count",
       "type": "timeseries"
     },
     {
@@ -827,32 +860,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-purple",
+                "color": "#050505",
                 "value": null
-              },
-              {
-                "color": "dark-red",
-                "value": 2
-              },
-              {
-                "color": "dark-orange",
-                "value": 3
-              },
-              {
-                "color": "dark-yellow",
-                "value": 4
-              },
-              {
-                "color": "rgb(150, 150, 150)",
-                "value": 5
-              },
-              {
-                "color": "rgb(51, 51, 51)",
-                "value": 6
-              },
-              {
-                "color": "rgb(5, 5, 5)",
-                "value": 7
               }
             ]
           }
@@ -861,7 +870,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "severity_code"
+              "options": "severity"
             },
             "properties": [
               {
@@ -869,29 +878,45 @@
                 "value": [
                   {
                     "options": {
-                      "0": {
-                        "text": "Emergency"
-                      },
-                      "1": {
+                      "alert": {
+                        "color": "#8f3bb8",
+                        "index": 1,
                         "text": "Alert"
                       },
-                      "2": {
+                      "crit": {
+                        "color": "#c4162a",
+                        "index": 2,
                         "text": "Critical"
                       },
-                      "3": {
+                      "debug": {
+                        "color": "#050505",
+                        "index": 7,
+                        "text": "Debug"
+                      },
+                      "emerg": {
+                        "color": "#8f3bb8",
+                        "index": 0,
+                        "text": "Emergency"
+                      },
+                      "err": {
+                        "color": "#fa6400",
+                        "index": 3,
                         "text": "Error"
                       },
-                      "4": {
-                        "text": "Warning"
-                      },
-                      "5": {
-                        "text": "Notice"
-                      },
-                      "6": {
+                      "info": {
+                        "color": "#333333",
+                        "index": 6,
                         "text": "Info"
                       },
-                      "7": {
-                        "text": "Debug"
+                      "notice": {
+                        "color": "#969696",
+                        "index": 5,
+                        "text": "Notice"
+                      },
+                      "warning": {
+                        "color": "#e0b400",
+                        "index": 4,
+                        "text": "Warning"
                       }
                     },
                     "type": "value"
@@ -914,7 +939,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Time"
+              "options": "_time"
             },
             "properties": [
               {
@@ -993,7 +1018,7 @@
           "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"syslog\" and\r\n    r._field == \"message\" and\r\n    r[\"appname\"] =~ /${appname}/ and\r\n    r[\"hostname\"] =~ /${hostname}/ and\r\n    r[\"severity\"] =~ /${severity}/\r\n  )",
+          "query": "import \"strings\"\r\n\r\nfrom(bucket: v.defaultBucket)\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"syslog\" and\r\n    r._field == \"message\" and\r\n    r[\"appname\"] =~ /^${appname:regex}$/ and\r\n    r[\"hostname\"] =~ /^${hostname:regex}$/ and\r\n    r[\"severity\"] =~ /^${severity:regex}$/ and\r\n    strings.containsStr(v: r._value, substr: \"${messagequery}\")\r\n  )\r\n  |> toString()\r\n  |> group()",
           "refId": "A",
           "resultFormat": "table",
           "select": [
@@ -1042,6 +1067,39 @@
         }
       ],
       "title": "Syslog Messages",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_field": true,
+              "_measurement": true,
+              "_start": true,
+              "_stop": true,
+              "facility": true,
+              "host": true,
+              "source": true
+            },
+            "indexByName": {
+              "_field": 3,
+              "_measurement": 4,
+              "_start": 0,
+              "_stop": 1,
+              "_time": 2,
+              "_value": 8,
+              "appname": 5,
+              "facility": 9,
+              "host": 10,
+              "hostname": 6,
+              "severity": 7,
+              "source": 11
+            },
+            "renameByName": {
+              "_value": "Message"
+            }
+          }
+        }
+      ],
       "type": "table"
     }
   ],
@@ -1052,7 +1110,7 @@
   "templating": {
     "list": [
       {
-        "allValue": ".*",
+        "allValue": "",
         "current": {
           "selected": false,
           "text": "All",
@@ -1066,7 +1124,7 @@
         "hide": 0,
         "includeAll": true,
         "label": "Appname",
-        "multi": false,
+        "multi": true,
         "name": "appname",
         "options": [],
         "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"syslog\")\r\n  |> keyValues(keyColumns: [\"appname\"])\r\n  |> group()\r\n  |> keep(columns: [\"appname\"])\r\n  |> distinct(column: \"appname\")",
@@ -1080,7 +1138,7 @@
         "useTags": false
       },
       {
-        "allValue": ".*",
+        "allValue": "",
         "current": {
           "selected": false,
           "text": "All",
@@ -1094,7 +1152,7 @@
         "hide": 0,
         "includeAll": true,
         "label": "Hostname",
-        "multi": false,
+        "multi": true,
         "name": "hostname",
         "options": [],
         "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"syslog\")\r\n  |> keyValues(keyColumns: [\"hostname\"])\r\n  |> group()\r\n  |> keep(columns: [\"hostname\"])\r\n  |> distinct(column: \"hostname\")",
@@ -1108,7 +1166,7 @@
         "useTags": false
       },
       {
-        "allValue": ".*",
+        "allValue": "",
         "current": {
           "selected": false,
           "text": "All",
@@ -1122,7 +1180,7 @@
         "hide": 0,
         "includeAll": true,
         "label": "Severity",
-        "multi": false,
+        "multi": true,
         "name": "severity",
         "options": [],
         "query": "from(bucket: \"logs\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"syslog\")\r\n  |> keyValues(keyColumns: [\"severity\"])\r\n  |> group()\r\n  |> keep(columns: [\"severity\"])\r\n  |> distinct(column: \"severity\")",
@@ -1148,11 +1206,11 @@
         "options": [
           {
             "selected": true,
-            "text": ".*",
-            "value": ".*"
+            "text": "",
+            "value": ""
           }
         ],
-        "query": ".*",
+        "query": "",
         "skipUrlSync": false,
         "type": "textbox"
       }
@@ -1183,8 +1241,8 @@
     ]
   },
   "timezone": "",
-  "title": "Syslog-v2.0",
-  "uid": "TIYeHqRgZ2",
-  "version": 20,
+  "title": "Syslog",
+  "uid": "TIYeHqRgZ",
+  "version": 37,
   "weekStart": ""
 }
